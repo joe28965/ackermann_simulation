@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<robot name="wheel" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- Wheels -->
+  <xacro:macro name="cylinder_inertia" params="m r h">
+    <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+              izz="${m*r*r/2}"/>
+  </xacro:macro>
+
+  <xacro:macro name="wheel" params="name parent *origin">
+    <link name="wheel_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="${M_PI_2} 0  0"/>
+        <geometry>
+          <cylinder length="${wheel_height}" radius="${wheel_radius}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${M_PI_2} 0 0"/>
+        <geometry>
+          <cylinder length="${wheel_height}" radius="${wheel_radius}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="${wheel_mass}"/>
+        <origin xyz="0 0 0"/>
+        <xacro:cylinder_inertia  m="${wheel_mass}" r="${wheel_radius}" h="${wheel_height}"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="wheel_${name}">
+      <material>Gazebo/Black</material>
+      <turnGravityOff>false</turnGravityOff>
+    </gazebo>
+
+    <joint name="wheel_${name}_joint" type="revolute">
+      <parent link="${parent}"/>
+      <child link="wheel_${name}"/>
+      <xacro:insert_block name="origin"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="-1e+16" upper="1e+16" effort="20.0" velocity="5.0"/>
+      <dynamics damping="0.4" friction="0.5"/>
+    </joint>
+
+  </xacro:macro>
+
+</robot>

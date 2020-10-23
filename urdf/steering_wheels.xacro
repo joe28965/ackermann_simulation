@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<robot name="steering_wheel" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- Steering -->
+
+  <xacro:macro name="steering_wheel" params="name parent *origin limit_low limit_high">
+    <link name="steering_wheel_${name}" >
+			<inertial>
+				<mass value="1.0"/>
+				<origin xyz="0.0 0 0.0"/>
+				<inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="steering_wheel_${name}">
+      <material>Gazebo/White</material>
+      <turnGravityOff>false</turnGravityOff>
+    </gazebo>
+
+    <joint name="steering_wheel_${name}_joint" type="revolute">
+      <parent link="${parent}"/>
+      <child link="steering_wheel_${name}"/>
+      <xacro:insert_block name="origin"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="${limit_low}" upper="${limit_high}" effort="20.0" velocity="5.0"/>
+      <dynamics damping="0.4" friction="0.5"/>
+    </joint>
+
+		<xacro:wheel name="${name}" parent="steering_wheel_${name}">
+			<origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+		</xacro:wheel>
+
+  </xacro:macro>
+
+</robot>
