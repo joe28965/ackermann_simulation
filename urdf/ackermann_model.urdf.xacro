@@ -48,18 +48,18 @@
   </gazebo>
 
 	<!-- The steering wheels -->
-	<xacro:steering_wheel name="front_left" parent="base_link" limit_low="-1e+16" limit_high="1e+16" >
+	<xacro:steering_wheel name="front_left" parent="base_link" limit_low="-0.7" limit_high="0.7" visual_roll="-${M_PI_2}" visual_y="-0.023" >
 		<origin xyz="0.308 0.175 -${wheel_radius}" rpy="0 0 0"/>
 	</xacro:steering_wheel>
-	<xacro:steering_wheel name="front_right" parent="base_link" limit_low="-1e+16" limit_high="1e+16" >
+	<xacro:steering_wheel name="front_right" parent="base_link" limit_low="-0.7" limit_high="0.7" visual_roll="${M_PI_2}" visual_y="0.025" >
 		<origin xyz="0.308 -0.175 -${wheel_radius}" rpy="0 0 0"/>
 	</xacro:steering_wheel>
 
 	<!-- wheels -->
-	<xacro:wheel name="back_left" parent="base_link" >
+	<xacro:wheel name="back_left" parent="base_link" visual_roll="-${M_PI_2}" visual_y="-0.023" >
 		<origin xyz="-0.308 0.175 -${wheel_radius}" rpy="0 0 0"/>
 	</xacro:wheel>
-	<xacro:wheel name="back_right" parent="base_link" >
+	<xacro:wheel name="back_right" parent="base_link" visual_roll="${M_PI_2}" visual_y="0.025" >
 		<origin xyz="-0.308 -0.175 -${wheel_radius}" rpy="0 0 0"/>
 	</xacro:wheel>
 
@@ -85,20 +85,16 @@
       <rear_right_joint>wheel_back_right_joint</rear_right_joint>
       <left_steering_joint>steering_wheel_front_left_joint</left_steering_joint>
       <right_steering_joint>steering_wheel_front_right_joint</right_steering_joint>
-      <!-- <steering_wheel_joint>steering_joint</steering_wheel_joint> -->
       <!-- Max absolute steer angle for tyre in radians-->
       <!-- Any cmd_vel angular z greater than this would be capped -->
-      <max_steer>0.6458</max_steer>
-      <!-- Max absolute steering angle of steering wheel -->
-      <!-- <max_steering_angle>7.85</max_steering_angle> -->
-      <!-- Max absolute linear speed in m/s -->
+      <max_steer>0.7</max_steer>
       <max_speed>20</max_speed>
       <!-- PID tuning -->
-      <left_steering_pid_gain>1500 0 1</left_steering_pid_gain>
+      <left_steering_pid_gain>75 0 1</left_steering_pid_gain>
       <left_steering_i_range>0 0</left_steering_i_range>
-      <right_steering_pid_gain>1500 0 1</right_steering_pid_gain>
+      <right_steering_pid_gain>75 0 1</right_steering_pid_gain>
       <right_steering_i_range>0 0</right_steering_i_range>
-      <linear_velocity_pid_gain>1000 0 1</linear_velocity_pid_gain>
+      <linear_velocity_pid_gain>50 0 1</linear_velocity_pid_gain>
       <linear_velocity_i_range>0 0</linear_velocity_i_range>
       <!-- output -->
       <publish_odom>true</publish_odom>

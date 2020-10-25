@@ -2,7 +2,7 @@
 <robot name="steering_wheel" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Steering -->
 
-  <xacro:macro name="steering_wheel" params="name parent *origin limit_low limit_high">
+  <xacro:macro name="steering_wheel" params="name parent *origin limit_low limit_high visual_roll visual_y">
     <link name="steering_wheel_${name}" >
 			<inertial>
 				<mass value="1.0"/>
@@ -25,7 +25,7 @@
       <dynamics damping="0.4" friction="0.5"/>
     </joint>
 
-		<xacro:wheel name="${name}" parent="steering_wheel_${name}">
+		<xacro:wheel name="${name}" parent="steering_wheel_${name}" visual_roll="${visual_roll}" visual_y="${visual_y}" >
 			<origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
 		</xacro:wheel>
 

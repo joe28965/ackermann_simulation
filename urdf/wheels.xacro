@@ -7,12 +7,12 @@
               izz="${m*r*r/2}"/>
   </xacro:macro>
 
-  <xacro:macro name="wheel" params="name parent *origin">
+  <xacro:macro name="wheel" params="name parent *origin visual_roll visual_y" >
     <link name="wheel_${name}">
       <visual>
-        <origin xyz="0 0 0" rpy="${M_PI_2} 0  0"/>
+        <origin xyz="0 ${visual_y} 0" rpy="${visual_roll} 0  0"/>
         <geometry>
-          <cylinder length="${wheel_height}" radius="${wheel_radius}"/>
+					<mesh filename="model://ackermann_model/meshes/wheel.stl" scale="0.0055 0.0055 0.0055" />
         </geometry>
         <material name="black"/>
       </visual>
