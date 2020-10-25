@@ -32,6 +32,29 @@
     <gazebo reference="wheel_${name}">
       <material>Gazebo/Black</material>
       <turnGravityOff>false</turnGravityOff>
+			<collision name="wheel_${name}_collision">
+        <surface>
+          <friction>
+            <ode>
+              <mu>40.0</mu>
+              <mu2>40.0</mu2>
+              <fdir1>1 0 0</fdir1>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>100000</kp>
+              <kd>0.1</kd>
+              <max_vel>20</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
     </gazebo>
 
     <joint name="wheel_${name}_joint" type="revolute">
@@ -40,7 +63,7 @@
       <xacro:insert_block name="origin"/>
       <axis xyz="0 1 0"/>
       <limit lower="-1e+16" upper="1e+16" effort="20.0" velocity="5.0"/>
-      <dynamics damping="0.4" friction="0.5"/>
+      <dynamics damping="0.4" friction="0.2"/>
     </joint>
 
   </xacro:macro>

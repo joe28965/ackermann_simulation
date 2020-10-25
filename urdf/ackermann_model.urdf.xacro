@@ -88,7 +88,7 @@
       <!-- Max absolute steer angle for tyre in radians-->
       <!-- Any cmd_vel angular z greater than this would be capped -->
       <max_steer>0.7</max_steer>
-      <max_speed>20</max_speed>
+      <max_speed>40</max_speed>
       <!-- PID tuning -->
       <left_steering_pid_gain>75 0 1</left_steering_pid_gain>
       <left_steering_i_range>0 0</left_steering_i_range>

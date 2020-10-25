@@ -28,7 +28,7 @@ find_package(urdf REQUIRED)
 # Install
 ################################################################################
 install(
-  DIRECTORY urdf launch models
+  DIRECTORY launch map models params rviz urdf
   DESTINATION share/${PROJECT_NAME}
 )
 

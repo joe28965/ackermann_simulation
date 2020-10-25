@@ -80,6 +80,29 @@
   <gazebo reference="wheel_front_left">
     <material>Gazebo/Black</material>
     <turnGravityOff>false</turnGravityOff>
+    <collision name="wheel_front_left_collision">
+      <surface>
+        <friction>
+          <ode>
+            <mu>40.0</mu>
+            <mu2>40.0</mu2>
+            <fdir1>1 0 0</fdir1>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <soft_cfm>0</soft_cfm>
+            <soft_erp>0.2</soft_erp>
+            <kp>100000</kp>
+            <kd>0.1</kd>
+            <max_vel>20</max_vel>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
   </gazebo>
   <joint name="wheel_front_left_joint" type="revolute">
     <parent link="steering_wheel_front_left"/>
@@ -87,7 +110,7 @@
     <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
     <axis xyz="0 1 0"/>
     <limit effort="20.0" lower="-1e+16" upper="1e+16" velocity="5.0"/>
-    <dynamics damping="0.4" friction="0.5"/>
+    <dynamics damping="0.4" friction="0.2"/>
   </joint>
   <link name="steering_wheel_front_right">
     <inertial>
@@ -131,6 +154,29 @@
   <gazebo reference="wheel_front_right">
     <material>Gazebo/Black</material>
     <turnGravityOff>false</turnGravityOff>
+    <collision name="wheel_front_right_collision">
+      <surface>
+        <friction>
+          <ode>
+            <mu>40.0</mu>
+            <mu2>40.0</mu2>
+            <fdir1>1 0 0</fdir1>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <soft_cfm>0</soft_cfm>
+            <soft_erp>0.2</soft_erp>
+            <kp>100000</kp>
+            <kd>0.1</kd>
+            <max_vel>20</max_vel>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
   </gazebo>
   <joint name="wheel_front_right_joint" type="revolute">
     <parent link="steering_wheel_front_right"/>
@@ -138,7 +184,7 @@
     <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
     <axis xyz="0 1 0"/>
     <limit effort="20.0" lower="-1e+16" upper="1e+16" velocity="5.0"/>
-    <dynamics damping="0.4" friction="0.5"/>
+    <dynamics damping="0.4" friction="0.2"/>
   </joint>
   <link name="wheel_back_left">
     <visual>
@@ -163,6 +209,29 @@
   <gazebo reference="wheel_back_left">
     <material>Gazebo/Black</material>
     <turnGravityOff>false</turnGravityOff>
+    <collision name="wheel_back_left_collision">
+      <surface>
+        <friction>
+          <ode>
+            <mu>40.0</mu>
+            <mu2>40.0</mu2>
+            <fdir1>1 0 0</fdir1>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <soft_cfm>0</soft_cfm>
+            <soft_erp>0.2</soft_erp>
+            <kp>100000</kp>
+            <kd>0.1</kd>
+            <max_vel>20</max_vel>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
   </gazebo>
   <joint name="wheel_back_left_joint" type="revolute">
     <parent link="base_link"/>
@@ -170,7 +239,7 @@
     <origin rpy="0 0 0" xyz="-0.308 0.175 -0.075"/>
     <axis xyz="0 1 0"/>
     <limit effort="20.0" lower="-1e+16" upper="1e+16" velocity="5.0"/>
-    <dynamics damping="0.4" friction="0.5"/>
+    <dynamics damping="0.4" friction="0.2"/>
   </joint>
   <link name="wheel_back_right">
     <visual>
@@ -195,6 +264,29 @@
   <gazebo reference="wheel_back_right">
     <material>Gazebo/Black</material>
     <turnGravityOff>false</turnGravityOff>
+    <collision name="wheel_back_right_collision">
+      <surface>
+        <friction>
+          <ode>
+            <mu>40.0</mu>
+            <mu2>40.0</mu2>
+            <fdir1>1 0 0</fdir1>
+            <slip1>0.0</slip1>
+            <slip2>0.0</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <soft_cfm>0</soft_cfm>
+            <soft_erp>0.2</soft_erp>
+            <kp>100000</kp>
+            <kd>0.1</kd>
+            <max_vel>20</max_vel>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
   </gazebo>
   <joint name="wheel_back_right_joint" type="revolute">
     <parent link="base_link"/>
@@ -202,7 +294,7 @@
     <origin rpy="0 0 0" xyz="-0.308 -0.175 -0.075"/>
     <axis xyz="0 1 0"/>
     <limit effort="20.0" lower="-1e+16" upper="1e+16" velocity="5.0"/>
-    <dynamics damping="0.4" friction="0.5"/>
+    <dynamics damping="0.4" friction="0.2"/>
   </joint>
   <gazebo>
     <plugin filename="libgazebo_ros_joint_state_publisher.so" name="joint_state_publisher">
@@ -229,7 +321,7 @@
       <!-- Max absolute steer angle for tyre in radians-->
       <!-- Any cmd_vel angular z greater than this would be capped -->
       <max_steer>0.7</max_steer>
-      <max_speed>20</max_speed>
+      <max_speed>40</max_speed>
       <!-- PID tuning -->
       <left_steering_pid_gain>75 0 1</left_steering_pid_gain>
       <left_steering_i_range>0 0</left_steering_i_range>
